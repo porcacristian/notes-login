@@ -4,6 +4,7 @@ import { connectDB } from "./config/database.js";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import  indexRoutes  from "./routes/index.routes.js";
+import  notesRoutes  from "./routes/notes.routes.js";
 import express from "express";
 import morgan from "morgan";
 const app = express()
@@ -24,7 +25,12 @@ app.use(morgan('dev'))
 
 
 //Routes
+
 app.use(indexRoutes)
+app.use(notesRoutes)
+
+
+
 //Initializing app
 
 const start = async ()=>{
