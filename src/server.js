@@ -22,6 +22,7 @@ app.use(express.urlencoded({extended: false}))
 //Middlewares
 app.use(express.static(join(__dirname,'public')))
 app.use(morgan('dev'))
+app.use(express.json())
 
 
 //Routes
