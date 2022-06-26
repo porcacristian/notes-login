@@ -40,8 +40,20 @@ notesCtrl.createNote =  async(req,res)=> {
 
 
 //Update notes
-notesCtrl.updateNote = (req,res)=> {
-    res.send('Update note')
+notesCtrl.updateNote = async (req,res)=> {
+    try {
+        const {id: notesID} = req.params
+        const note = await Note.findByIdAndUpdate({_id: notesID}, req.body,{
+            new: true,
+            runValidators: true
+        })
+        if(!note){
+            return res.status(404).json({msg: `No task with id: ${notesID}`})
+        }    
+        res.status(200).json({note})
+    } catch (error) {
+        res.status(500).json({msg: error})
+    }
 }
 
 
