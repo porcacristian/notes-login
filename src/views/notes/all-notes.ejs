@@ -1,4 +1,25 @@
 <%- include('../partials/header', {title: 'AllNotes'})%>
 
-    
+<div class="container-lg">    
+    <% newNote.forEach(function(note) { %>     
+        <ul class="d-inline-flex justify-content-between flex-row mt-3">
+            
+                <li>
+                    <div class="card text-white bg-primary mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= note.title%></h5>                  
+                            <p class="card-text"><%= note.description%></p>
+                            <a href="#" class="card-link text-white">Edit</a>
+                            <a href="#" class="card-link text-white">Delete</a>
+                          </div>
+                    </div>                 
+                        
+                      
+                </li>
+                
+                
+            </ul>
+                <% }); %>    
+</div>
+
 <%- include('../partials/footer')%>

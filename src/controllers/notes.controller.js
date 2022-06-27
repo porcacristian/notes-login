@@ -6,7 +6,7 @@ import Note from "../models/Note.js";
 notesCtrl.getAllNotes = async(req,res)=> {
     try {        
         const newNote = await Note.find()        
-        res.status(200).render('notes/all-notes')
+        res.status(200).render('notes/all-notes', {newNote})
         } catch (error) {
             res.status(500).json({msg: error})    
         }
