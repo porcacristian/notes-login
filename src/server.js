@@ -5,6 +5,7 @@ import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import  indexRoutes  from "./routes/index.routes.js";
 import  notesRoutes  from "./routes/notes.routes.js";
+
 import express from "express";
 import morgan from "morgan";
 const app = express()
@@ -27,8 +28,10 @@ app.use(express.json())
 
 //Routes
 
-app.use(indexRoutes)
 app.use(notesRoutes)
+app.use(indexRoutes)
+import {notFound} from"./helpers/404.js"
+app.use(notFound)
 
 
 
