@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 import  indexRoutes  from "./routes/index.routes.js";
 import  notesRoutes  from "./routes/notes.routes.js";
 
+import methodOverride from'method-override'
 import express from "express";
 import morgan from "morgan";
 const app = express()
@@ -18,9 +19,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 //Settings
 app.set('views', join(__dirname,'views'))
 app.set('view engine' , 'ejs')
-app.use(express.urlencoded({extended: false}))
+
 
 //Middlewares
+app.use(methodOverride('_method'))
+app.use(express.urlencoded({extended: false}))
 app.use(express.static(join(__dirname,'public')))
 app.use(morgan('dev'))
 app.use(express.json())

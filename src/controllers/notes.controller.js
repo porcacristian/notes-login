@@ -2,6 +2,16 @@ export const notesCtrl = {}
 
 import Note from "../models/Note.js";
 
+
+
+
+
+
+//render notes form
+notesCtrl.renderForm = (req,res)=>{
+    res.render('notes/form')
+}
+
 //Getting all notws
 notesCtrl.getAllNotes = async(req,res)=> {
     try {        
@@ -31,15 +41,28 @@ notesCtrl.createNote =  async(req,res)=> {
     try {
         const {title, description} = req.body
         const newNote = await new Note ({title, description})
-        await newNote.save()
-        res.status(201).json({newNote})
+        await newNote.save()       
+        res.status(201).redirect('/api/v1/notes')
         } catch (error) {
             res.status(500).json({msg: error})    
         }
 }
 
 
+// Update notes form
+
+notesCtrl.renderFormUpdate = (req,res)=>{
+    res.render('notes/form-update')
+}
+
+
+
+
+
+
+
 //Update notes
+
 notesCtrl.updateNote = async (req,res)=> {
     try {
         const {id: notesID} = req.params

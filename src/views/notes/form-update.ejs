@@ -1,0 +1,14 @@
+<%- include('../partials/header', {title: 'Update note'})%>
+<div class="container-lg">
+    <form class="d-flex flex-column w-50 mx-auto" method="POST" action="/api/v1/notes">
+        <div class="mb-3">
+          <label for="noteTitle" class="form-label">Title</label>
+          <input type="text" class="form-control" id="noteTitle" name="title" placeholder="New title">
+        </div>       
+        <div>
+            <textarea name="description" rows="3" placeholder="New description" class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Save</button>
+      </form>
+</div>
+  <%- include('../partials/footer')%>
