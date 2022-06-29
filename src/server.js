@@ -5,7 +5,9 @@ import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import  indexRoutes  from "./routes/index.routes.js";
 import  notesRoutes  from "./routes/notes.routes.js";
-
+import {notFound} from"./helpers/404.js"
+import flash from "connect-flash";
+import session from "express-session";
 import methodOverride from'method-override'
 import express from "express";
 import morgan from "morgan";
@@ -27,13 +29,27 @@ app.use(express.urlencoded({extended: false}))
 app.use(express.static(join(__dirname,'public')))
 app.use(morgan('dev'))
 app.use(express.json())
+app.use(session({
+    secret: process.env.SECRET,
+    resave: true,
+    saveUninitialized: true
+}))
+app.use(flash())
+
+
+//Global Variables
+app.use((req,res,next)=>{
+    res.locals.success_msg = req.flash('success_msg')
+    res.locals.errors_msg = req.flash('errors_msg')
+    next()
+})
+
+
 
 
 //Routes
-
 app.use(notesRoutes)
 app.use(indexRoutes)
-import {notFound} from"./helpers/404.js"
 app.use(notFound)
 
 

@@ -38,7 +38,8 @@ notesCtrl.createNote =  async(req,res)=> {
     try {
         const {title, description} = req.body
         const newNote = await new Note ({title, description})
-        await newNote.save()       
+        await newNote.save()
+        req.flash('success_msg', 'Note added successfully')       
         res.status(201).redirect('/api/v1/notes')
         } catch (error) {
             res.status(500).json({msg: error})    
@@ -66,6 +67,7 @@ notesCtrl.updateNote = async (req,res)=> {
         if(!note){
             return res.status(404).json({msg: `No task with id: ${req.params.id}`})
         }    
+        req.flash('success_msg', 'Note updated successfully')
         res.status(200).redirect('/api/v1/notes')
     } catch (error) {
         res.status(500).json({msg: error})
@@ -83,6 +85,7 @@ notesCtrl.deteleNote = async(req,res)=> {
         if(!note){
             return res.status(404).json({msg: `No task with id: ${notesID}`})
         }    
+        req.flash('success_msg', 'Note deleted successfully')
         res.status(200).redirect('/api/v1/notes')
     } catch (error) {
         res.status(500).json({msg: error})
