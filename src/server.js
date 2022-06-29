@@ -3,6 +3,7 @@ import { PORT } from "./config/port.js";
 import { connectDB } from "./config/database.js";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
+import { flashMessages } from "./config/flash.js";
 import  indexRoutes  from "./routes/index.routes.js";
 import  notesRoutes  from "./routes/notes.routes.js";
 import {notFound} from"./helpers/404.js"
@@ -38,11 +39,7 @@ app.use(flash())
 
 
 //Global Variables
-app.use((req,res,next)=>{
-    res.locals.success_msg = req.flash('success_msg')
-    res.locals.errors_msg = req.flash('errors_msg')
-    next()
-})
+app.use(flashMessages)
 
 
 

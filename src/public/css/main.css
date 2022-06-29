@@ -5,7 +5,12 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 
 }
 
-
+/*HEADER*/
 .logo{
     width: 7rem;
+}
+#navbarDropdown{
+    font-size: 1.3rem;
+    font-weight: bold;
+    line-height: 1.1rem;
 }
