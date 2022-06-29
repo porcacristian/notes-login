@@ -1,14 +1,25 @@
 <%- include('../partials/header', {title: 'Update note'})%>
-<div class="container-lg">
-    <form class="d-flex flex-column w-50 mx-auto" method="POST" action="/api/v1/notes">
-        <div class="mb-3">
-          <label for="noteTitle" class="form-label">Title</label>
-          <input type="text" class="form-control" id="noteTitle" name="title" placeholder="New title">
-        </div>       
-        <div>
-            <textarea name="description" rows="3" placeholder="New description" class="form-control"></textarea>
+    <div class="col-md-4 mx-auto m-3">
+      <div class="card">
+        <div class="card-header">
+          <h3>Edit note</h3>
         </div>
-        <button type="submit" class="btn btn-primary mt-2">Save</button>
-      </form>
-</div>
+        <div class="card-body">
+          <form action="/api/v1/notes/<%= note.id%>?_method=PUT" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            <div class="form-group">
+              <input type="text" class="form-control" name="title" placeholder="Title" value="<%= note.title%>">
+            </div>
+            <div class="form-group mt-1">
+              <textarea name="description" class="form-control" placeholder="Description..." ><%= note.description%></textarea>
+            </div>
+            <div class="from-group mt-1">
+              <button class="btn btn-primary btn-block w-100" type="submit">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   <%- include('../partials/footer')%>

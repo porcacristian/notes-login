@@ -2,11 +2,6 @@ export const notesCtrl = {}
 
 import Note from "../models/Note.js";
 
-
-
-
-
-
 //render notes form
 notesCtrl.renderForm = (req,res)=>{
     res.render('notes/form')
@@ -21,6 +16,8 @@ notesCtrl.getAllNotes = async(req,res)=> {
             res.status(500).json({msg: error})    
         }
 }
+
+
 //Get single note
 notesCtrl.getNote = async (req,res)=> {
     try {
@@ -49,35 +46,33 @@ notesCtrl.createNote =  async(req,res)=> {
 }
 
 
+
+
 // Update notes form
-
-notesCtrl.renderFormUpdate = (req,res)=>{
-    res.render('notes/form-update')
-}
-
-
-
-
-
-
+notesCtrl.renderFormUpdate = async(req,res)=>{
+        const note = await Note.findById(req.params.id)
+        res.render('notes/form-update', {note})
+}   
 
 //Update notes
 
 notesCtrl.updateNote = async (req,res)=> {
     try {
-        const {id: notesID} = req.params
-        const note = await Note.findByIdAndUpdate({_id: notesID}, req.body,{
+        //const {id: notesID} = req.params
+        const note = await Note.findByIdAndUpdate(req.params.id, req.body,{
             new: true,
             runValidators: true
         })
         if(!note){
-            return res.status(404).json({msg: `No task with id: ${notesID}`})
+            return res.status(404).json({msg: `No task with id: ${req.params.id}`})
         }    
-        res.status(200).json({note})
+        res.status(200).redirect('/api/v1/notes')
     } catch (error) {
         res.status(500).json({msg: error})
     }
 }
+
+
 
 
 //Delete notes
@@ -88,7 +83,7 @@ notesCtrl.deteleNote = async(req,res)=> {
         if(!note){
             return res.status(404).json({msg: `No task with id: ${notesID}`})
         }    
-        res.status(200).json({note})
+        res.status(200).redirect('/api/v1/notes')
     } catch (error) {
         res.status(500).json({msg: error})
     }
