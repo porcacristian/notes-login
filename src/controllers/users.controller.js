@@ -38,10 +38,17 @@ usersCtrl.signup = async (req,res)=>{
             })
             console.log(errors)
         }else{
-        const newUser = await new User ({name,lastname, email, password})
-        await newUser.save()
-        req.flash('success_msg', 'User created successfully, please login to continue')       
-        res.status(201).redirect('/api/v1/users/sign-in')
+        const userEmail = await User.findOne({email: email})
+        if(userEmail){
+            req.flash('errors_msg', 'User already exists')
+            res.redirect('./signup')
+        }else{
+            const newUser = await new User ({name,lastname, email, password})
+            newUser.password = await newUser.encryptPassword(password)
+            await newUser.save()
+            req.flash('success_msg', 'User created successfully, please login to continue')       
+            res.status(201).redirect('/api/v1/users/sign-in')
+        }    
         }        
         } catch (error) {
             res.status(500).json({msg: error})    
