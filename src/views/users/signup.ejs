@@ -1,13 +1,7 @@
 <%- include('../partials/header', {title: 'Register'})%>
+<%- include('../partials/form-validator')%>
 
-<% errors.forEach((msg)=>{%>
-  <div class="container-lg mt-3">
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <%= msg.msg%>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-  </div>
-<%})%> 
+
 
 <div class="container-lg w-50">
   <form class="row g-3 bg-light mt-4 p-4 rounded" method="POST" action="/api/v1/users/signup">

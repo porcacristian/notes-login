@@ -4,7 +4,7 @@ import Note from "../models/Note.js";
 
 //render notes form
 notesCtrl.renderForm = (req,res)=>{
-    res.render('notes/form')
+    res.render('notes/form', {errors: []})
 }
 
 //Getting all notws
@@ -36,11 +36,29 @@ notesCtrl.getNote = async (req,res)=> {
 //Create notes
 notesCtrl.createNote =  async(req,res)=> {    
     try {
-        const {title, description} = req.body
+        const {title, description} = req.body       
+        const errors = []
+        if(!title || !description){
+            errors.push({msg: 'All fields are required'})           
+        }
+        if(title.length < 3) {
+            errors.push({msg: 'Title must be at least 3 characters'})
+        }
+        if(description.length < 3){
+            errors.push({msg: 'Description must be at least 3 characters'})
+        }
+        if(errors.length > 0){
+            res.render('notes/form', {
+                errors
+            })
+        }
+        else{
         const newNote = await new Note ({title, description})
         await newNote.save()
         req.flash('success_msg', 'Note added successfully')       
         res.status(201).redirect('/api/v1/notes')
+        }
+        
         } catch (error) {
             res.status(500).json({msg: error})    
         }
