@@ -28,9 +28,9 @@ app.set('view engine' , 'ejs')
 //Middlewares
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({extended: false}))
+app.use(express.json())
 app.use(express.static(join(__dirname,'public')))
 app.use(morgan('dev'))
-app.use(express.json())
 app.use(session({
     secret: process.env.SECRET,
     resave: true,

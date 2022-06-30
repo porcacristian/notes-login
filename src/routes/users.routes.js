@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { usersCtrl } from "../controllers/users.controller.js";
-const { renderSignUpForm, renderSignInForm, signIn, signUp, logOut } =
+const { renderSignUpForm, renderSignInForm, signIn, signup, logOut } =
   usersCtrl;
 
 const router = Router();
 
 //New user
-router.get("/api/v1/users/new-user", renderSignUpForm);
-router.post("/api/v1/users/new-user", signUp);
+router.get("/api/v1/users/signup", renderSignUpForm);
+router.post("/api/v1/users/signup", signup);
 
 //Login
 router.get("/api/v1/users/sign-in", renderSignInForm);
