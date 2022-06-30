@@ -1,7 +1,7 @@
 <%- include('../partials/header', {title: 'Login'})%>
 
-<div class="container-lg w-50 mt-4  ">
-    <form class="bg-light p-4 rounded">
+<div class="container-lg w-50 mt-4 ">
+    <form class="bg-light p-4 rounded" action="/api/v1/users/sign-in" method="POST">
         <h1 class="text-center text-dark pb-2">Login</h1>
         <img src="/img/login.png" alt="Login logo" class="w-50 img-fluid mx-auto" id="loginLogo">
         <div class="row mb-3">

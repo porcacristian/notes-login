@@ -9,7 +9,7 @@ usersCtrl.renderSignUpForm = (req,res)=>{
 
 //Register
 usersCtrl.signUp = async (req,res)=>{
-    try {
+    try {        
         const {name,lastname, email, password, password2} = req.body
         const newUser = await new User ({name,lastname, email, password})
         await newUser.save()
