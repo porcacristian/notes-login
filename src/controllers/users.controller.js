@@ -1,5 +1,6 @@
 export const usersCtrl = {}
 import User from "../models/User.js";
+import passport from "passport";
 
 
 //Register form
@@ -62,12 +63,18 @@ usersCtrl.renderSignInForm = (req,res)=>{
 }
 
 //Login
-usersCtrl.signIn = (req,res)=>{
-    res.redirect('/api/v1/notes')
-}
+usersCtrl.signIn = passport.authenticate('local',{
+    failureRedirect: './sign-in',
+    successRedirect: '/api/v1/notes',
+    failureFlash: true
+})
 
 
 //Logout
-usersCtrl.logOut = (req,res)=>{
-    res.session.destroy().redirect('/')
+usersCtrl.logOut = (req,res)=>{    
+    
+    req.session.destroy( (err)=> {
+        res.clearCookie('connect.sid');
+        res.redirect('/');
+      });
 }

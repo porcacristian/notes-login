@@ -27,6 +27,7 @@
                     <a class="nav-link" href="/about"><i class="fa-solid fa-circle-info"> About</i></a>
                   </li>                                
                 </ul>
+                <% if(!user){%>
                 <ul class="navbar-nav mb-2 mb-lg-0">
                   <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/api/v1/users/sign-in"><i class="fa-solid fa-arrow-right-to-bracket"> Sign in</i></a>
@@ -34,20 +35,30 @@
                   <li class="nav-item">
                     <a class="nav-link" href="/api/v1/users/signup"><i class="fa-solid fa-user-plus"> Sign up</i></a>
                   </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Notes
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" href="/api/v1/notes">Notes <i class="fa-solid fa-note-sticky"></i> </a></li>
-                      <li><a class="dropdown-item" href="/api/v1/notes-add">Add note  <i class="fa-solid fa-plus"></i></a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Logout <i class="fa-solid fa-right-from-bracket"></i></a></li>
-                    </ul>
-                  </li>
-                </ul>            
+                </ul>
+                  <% }else{%>
+                  <ul>
+                    <li class="nav-item dropdown" id="notesDrop">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Notes
+                      </a>
+                      
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/api/v1/notes">Notes <i class="fa-solid fa-note-sticky"></i> </a></li>
+                        <li><a class="dropdown-item" href="/api/v1/notes-add">Add note  <i class="fa-solid fa-plus"></i></a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/users/logout">Logout <i class="fa-solid fa-right-from-bracket"></i></a></li>
+                      </ul>
+                     
+                    </li>
+                  </ul>
+                  
+                 
+                            
               </div>
+              <%}%>
             </div>
+            
           </nav>
     </div>
     <%- include('./messages')%>

@@ -14,6 +14,6 @@ router.get("/api/v1/users/sign-in", renderSignInForm);
 router.post("/api/v1/users/sign-in", signIn);
 
 //Logout
-router.get("/api/v1/users/logout", logOut);
+router.get("/users/logout", logOut);
 
 export default router;

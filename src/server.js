@@ -13,8 +13,13 @@ import session from "express-session";
 import methodOverride from'method-override'
 import express from "express";
 import morgan from "morgan";
-const app = express()
+import passport from "passport";
 
+
+//Initializations
+const app = express()
+import localStrategy from './config/strategies/passport.js';
+localStrategy()
 
 //Variables
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -36,6 +41,8 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(flash())
 
 
