@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node src/server",
     "dev": "nodemon src/server",
-    "build": "notes-login build --output public"
+    "build": "node build --output public"
   },
   "keywords": [],
   "author": "",
