@@ -10,7 +10,7 @@ notesCtrl.renderForm = (req,res)=>{
 //Getting all notws
 notesCtrl.getAllNotes = async(req,res)=> {
     try {        
-        const newNote = await Note.find()        
+        const newNote = await Note.find({user: req.user.id})        
         res.status(200).render('notes/all-notes', {newNote})
         } catch (error) {
             res.status(500).json({msg: error})    
@@ -54,6 +54,7 @@ notesCtrl.createNote =  async(req,res)=> {
         }
         else{
         const newNote = await new Note ({title, description})
+        newNote.user = req.user.id        
         await newNote.save()
         req.flash('success_msg', 'Note added successfully')       
         res.status(201).redirect('/api/v1/notes')
@@ -70,6 +71,10 @@ notesCtrl.createNote =  async(req,res)=> {
 // Update notes form
 notesCtrl.renderFormUpdate = async(req,res)=>{
         const note = await Note.findById(req.params.id)
+        if(note.user != req.user.id){
+            req.flash('errors_msg', 'Not authorized')
+            return res.redirect('/api/v1/notes')
+        }
         res.render('notes/form-update', {note})
 }   
 
