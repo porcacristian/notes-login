@@ -7,23 +7,28 @@ import bcryptjs from 'bcryptjs';
 const UserSchema = new Schema({
     name:{
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     lastname:{
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     email:{
         type: String,
         required: true,
         unique: true,
-        dropDups: true
+        dropDups: true,
+        trim: true
     },
     password:{
         type: String,
-        required: true
+        required: true,
+        trim: true
     }
 },{
+    versionKey: false,
     timestamps: true
 })
 

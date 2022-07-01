@@ -4,7 +4,8 @@ const {Schema, model} = mongoose
 const NoteSchema = new Schema({
     title: {
         type: String,
-        required : true
+        required : true,
+        trim: true
     },
     description:{
         type : String,
@@ -15,6 +16,7 @@ const NoteSchema = new Schema({
         required: true
     }
 },{
+    versionKey: false,
     timestamps: true
 })
 
