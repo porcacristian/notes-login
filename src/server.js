@@ -7,7 +7,7 @@ import { flashMessages } from "./config/flash.js";
 import  indexRoutes  from "./routes/index.routes.js";
 import  notesRoutes  from "./routes/notes.routes.js";
 import  usersRoutes  from "./routes/users.routes.js";
-import {notFound} from"./helpers/404.js"
+import {notFound} from"./helpers/404.js"       
 import flash from "connect-flash";
 import session from "express-session";
 import methodOverride from'method-override'
